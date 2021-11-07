@@ -8,11 +8,8 @@ void main() {
 class ScreenArguments {
   final String title;
   final String message;
-
   ScreenArguments(this.title, this.message);
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -58,6 +55,7 @@ class FirstScreen extends State<trangchu> {
             );
           });
     }
+
     return Scaffold(
         backgroundColor: Colors.lightBlue[400],
         body: Column(
@@ -148,7 +146,7 @@ class FirstScreen extends State<trangchu> {
                           arguments: ms);
                     } else {
                       ScreenArguments ms = ScreenArguments(
-                          'Xin lỗi', 'Đăng nhập không thành công thành công');
+                          'Xin lỗi', 'Đăng nhập không thành công ');
                       Navigator.pushNamed(context, baScreen.routeName,
                           arguments: ms);
                     }
@@ -173,23 +171,195 @@ class SecondScreen extends State<tranghai> {
 
   @override
   Widget build(BuildContext context) {
-      final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-
+    bool isChecked = false;
+    Widget done = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Done"))
+      ],
+    );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Đăng nhập thành công'),
+          backgroundColor: Colors.grey,
+          title: Row(
+            children: [Expanded(child: Text('MailBoxes')), done],
+          ),
+          centerTitle: true),
+      backgroundColor: Colors.grey[200],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 30, 400, 10),
+            child: Text(
+              'MailBoxes',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.only(left: 50),
+            child: Column(
+              children: ListTile.divideTiles(context: context, tiles: [
+                ListTile(
+                  leading: Icon(
+                    Icons.all_inbox,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "All inboxes",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_6,
+                    color: Colors.black54,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.cloud_outlined,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "ICloud",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_one,
+                    color: Colors.black54,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.mail_outline,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "Gmail",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_4,
+                    color: Colors.black54,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.mark_email_unread_outlined,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "Hotmail",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_3,
+                    color: Colors.black54,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.label_important_outline,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "VIP",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_two,
+                    color: Colors.black54,
+                  ),
+                ),
+              ]).toList(),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 30, 370, 10),
+            child: Text(
+              'Specical folder',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+            child: Column(
+              children: ListTile.divideTiles(context: context, tiles: [
+                ListTile(
+                  leading: Icon(
+                    Icons.security,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "Secure",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_one,
+                    color: Colors.black54,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.notifications_none,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    "Notifications",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.looks_5,
+                    color: Colors.black54,
+                  ),
+                ),
+              ]).toList(),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 20),
+            child: Column(
+              children: ListTile.divideTiles(context: context, tiles: [
+                ListTile(),
+                ListTile(
+                  contentPadding: EdgeInsets.fromLTRB(230, 0, 15, 0),
+                  title: Text("Delete",
+                      style: TextStyle(fontSize: 20, color: Colors.black)),
+                  trailing: Icon(
+                    Icons.delete_outline,
+                    color: Colors.black54,
+                  ),
+                ),
+              ]).toList(),
+            ),
+          )
+        ],
       ),
-      body: Center(
-          child: Column(children: [
-        Text(args.title),
-        Text(args.message),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('Try again'),
-        ),
-      ])),
     );
   }
 }
